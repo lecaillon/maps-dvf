@@ -2,16 +2,22 @@
 import { ref } from "vue";
 import FormSearchSale from "@/components/FormSearchSale.vue";
 import GmapsViewer from "@/components/GmapsViewer.vue";
+import { useStore } from "@/stores/store";
 
+const store = useStore();
 const showFormSearchSale = ref(true);
 </script>
 
 <template>
   <v-app>
     <v-layout>
-      <v-app-bar app>
+      <v-app-bar app density="compact">
         <v-app-bar-nav-icon @click="showFormSearchSale = !showFormSearchSale"> </v-app-bar-nav-icon>
         <v-toolbar-title>Maps - DVF</v-toolbar-title>
+        <v-spacer />
+        <v-chip class="ma-2" color="secondary">
+          {{ store.sales.length }} résultat(s)
+        </v-chip>
       </v-app-bar>
       <v-navigation-drawer v-model="showFormSearchSale" app width="375">
         <form-search-sale />
