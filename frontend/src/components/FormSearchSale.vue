@@ -61,7 +61,7 @@ async function searchCommunes(val: any) {
           color="secondary"
         ></v-range-slider>
         <v-range-slider
-          v-model="store.searchQuery.annee"
+          v-model="store.searchQuery.anneeRange"
           label="Année"
           step="1"
           min="2017"

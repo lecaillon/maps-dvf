@@ -5,6 +5,6 @@ export interface SearchSaleQuery {
   batiRange: number[];
   terrainRange: number[];
   commune: Commune;
-  annee: number[];
+  anneeRange: number[];
   favorite: number; // 0 false, 1 true
 }

@@ -29,7 +29,8 @@ app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
     AND code_type_local = 1 
     AND valeur_fonciere BETWEEN ? AND ? 
     AND surface_reelle_bati BETWEEN ? AND ? 
-    AND surface_terrain BETWEEN ? AND ?) WHERE favorite >= ? `,
+    AND surface_terrain BETWEEN ? AND ? 
+    AND substr(date_mutation, 1, 4) >= ? AND substr(date_mutation, 1, 4) <= ?) WHERE favorite >= ? `,
     [
       req.body.commune.code,
       req.body.budgetRange[0],
@@ -38,6 +39,8 @@ app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
       req.body.batiRange[1],
       req.body.terrainRange[0],
       req.body.terrainRange[1],
+      req.body.anneeRange[0].toString(),
+      req.body.anneeRange[1].toString(),
       req.body.favorite,
     ],
     (_, rows) => {

@@ -9,7 +9,7 @@ export const useStore = defineStore("main-store", () => {
   const searchQuery = ref({
     commune: Deauville,
     budgetRange: [800000, 1500000],
-    annee: [2017, 2022],
+    anneeRange: [2017, 2022],
     batiRange: [90, 200],
     terrainRange: [100, 2000],
     favorite: 0,
