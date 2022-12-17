@@ -14,8 +14,9 @@ function getAddress(sale: Sale) {
   return `${sale.adresse_numero} ${sale.adresse_nom_voie} ${sale.code_postal} ${sale.nom_commune}`;
 }
 
-function fav(id_mutation: string) {
-  alert(id_mutation)
+function fav(sale: Sale) {
+  sale.favorite = sale.favorite == 0 ? 1 : 0;
+  store.saveFavorite(sale.id_mutation, sale.favorite);
 }
 </script>
 
@@ -34,7 +35,7 @@ function fav(id_mutation: string) {
             <v-icon>mdi-ruler-square</v-icon><span class="ml-1 mr-2">{{ sale.surface_reelle_bati }} m²</span>
             <v-icon>mdi-pine-tree</v-icon><span class="mr-2">{{ sale.surface_terrain }} m²</span>
             <v-icon>mdi-calendar</v-icon><span class="ml-1 mr-2">{{ new Date(sale.date_mutation).getFullYear() }}</span>
-            <v-btn @click="fav(sale.id_mutation)" density="compact" variant="flat" icon="mdi-heart-outline" style="margin-left: -0px; margin-bottom: 2px;"></v-btn><span>Fav</span>
+            <v-btn @click="fav(sale)" :color="sale.favorite == 1 ? 'pink' : ''" density="compact" variant="text" icon="mdi-heart-outline" style="margin-left: -0px; margin-bottom: 2px;"></v-btn><span>Fav</span>
           </v-card-text>
         </v-card>
       </info-window>

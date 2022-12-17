@@ -13,4 +13,5 @@ export interface Sale {
   surface_terrain: number;
   longitude: number;
   latitude: number;
+  favorite: number; // bool
 }

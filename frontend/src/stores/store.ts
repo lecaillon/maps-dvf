@@ -26,9 +26,18 @@ export const useStore = defineStore("main-store", () => {
     sales.value = await response.json();
   }
 
+  async function saveFavorite(id_mutation: string, favorite: number): Promise<void> {
+    await fetch(`${BASE_URL_BACK}/favorite`, {
+      method: "POST",
+      body: JSON.stringify({ id_mutation, favorite }),
+      headers: { "Content-type": "application/json" },
+      mode: "cors"
+    });
+  }
+
   if (import.meta.hot) {
     import.meta.hot.accept(acceptHMRUpdate(useStore, import.meta.hot));
   }
 
-  return { searchQuery, searchDisabled, sales, fetchCommunes, fetchSales };
+  return { searchQuery, searchDisabled, sales, fetchCommunes, fetchSales, saveFavorite };
 });

@@ -21,12 +21,28 @@ app.get("/", (req, res) => res.send("🏠"));
 app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
   await importDvf(req.body.commune);
   dbDvf.all(
-    "SELECT * FROM sale WHERE code_commune = ? AND code_type_local = 1 AND valeur_fonciere BETWEEN ? AND ?",
+    `SELECT s.*, CASE WHEN f.id_mutation IS NULL THEN 0 ELSE 1 END as favorite 
+    FROM sale s 
+      LEFT OUTER JOIN favorite_sale f 
+      on s.id_mutation = f.id_mutation 
+    WHERE code_commune = ? 
+    AND code_type_local = 1 
+    AND valeur_fonciere BETWEEN ? AND ?`,
     [req.body.commune.code, req.body.budgetRange[0], req.body.budgetRange[1]],
     (_, rows) => {
       res.json(rows);
     }
   );
+});
+
+app.post<{}, {}, { id_mutation: string, favorite: number }, {}>("/favorite", async (req, res) => {
+  if (req.body.favorite == 0) {
+    dbDvf.run("DELETE FROM favorite_sale WHERE id_mutation = ?", [req.body.id_mutation]);
+  }
+  else {
+    dbDvf.run("INSERT INTO favorite_sale VALUES(?)", [req.body.id_mutation]);
+  }
+  return res.sendStatus(200);
 });
 
 app.get<{}, {}, Commune[], { nom: string }>("/communes", (req, res) => {
@@ -68,7 +84,13 @@ function bootstrap() {
         latitude REAL
     );
 
-    CREATE INDEX idx_sale_code_commune ON sale (code_commune); 
+    CREATE INDEX idx_sale_code_commune ON sale (code_commune);
+    CREATE INDEX idx_sale_id_mutation ON sale (id_mutation);
+
+    CREATE TABLE favorite_sale
+    (
+      id_mutation TEXT NOT NULL PRIMARY KEY
+    );
     `);
   } else {
     dbDvf = new sqlite3.Database(DB_DVF_PATH);
