@@ -28,6 +28,7 @@ async function searchCommunes(val: any) {
           hide-no-data
           clearable
           density="comfortable"
+          color="secondary"
         ></v-autocomplete>
         <v-range-slider
           v-model="store.searchQuery.budgetRange"
@@ -37,6 +38,7 @@ async function searchCommunes(val: any) {
           max="2000000"
           thumb-label="always"
           class="mt-8"
+          color="secondary"
         ></v-range-slider>
         <v-range-slider
           v-model="store.searchQuery.batiRange"
@@ -46,6 +48,7 @@ async function searchCommunes(val: any) {
           max="300"
           thumb-label="always"
           class="mt-8"
+          color="secondary"
         ></v-range-slider>
         <v-range-slider
           v-model="store.searchQuery.terrainRange"
@@ -55,12 +58,13 @@ async function searchCommunes(val: any) {
           max="10000"
           thumb-label="always"
           class="mt-8"
+          color="secondary"
         ></v-range-slider>
-        <v-range-slider v-model="store.searchQuery.annee" label="Année" step="1" min="2017" max="2022" thumb-label="always" class="mt-8"></v-range-slider>
+        <v-range-slider v-model="store.searchQuery.annee" label="Année" step="1" min="2017" max="2022" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
       </v-container>
     </v-card-text>
     <v-card-actions>
-      <v-btn @click="store.fetchSales" :disabled="store.searchDisabled" class="mx-auto" variant="tonal"> Rechercher </v-btn>
+      <v-btn @click="store.fetchSales" :disabled="store.searchDisabled" class="mx-auto" variant="tonal" color="secondary"> Rechercher </v-btn>
     </v-card-actions>
   </VCard>
 </template>
