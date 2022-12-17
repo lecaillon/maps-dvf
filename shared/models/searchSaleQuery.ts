@@ -6,4 +6,5 @@ export interface SearchSaleQuery {
   terrainRange: number[];
   commune: Commune;
   annee: number[];
+  favorite: number; // 0 false, 1 true
 }

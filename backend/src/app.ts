@@ -21,7 +21,7 @@ app.get("/", (req, res) => res.send("🏠"));
 app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
   await importDvf(req.body.commune);
   dbDvf.all(
-    `SELECT s.*, CASE WHEN f.id_mutation IS NULL THEN 0 ELSE 1 END as favorite 
+    `SELECT * FROM (SELECT s.*, CASE WHEN f.id_mutation IS NULL THEN 0 ELSE 1 END as favorite 
     FROM sale s 
       LEFT OUTER JOIN favorite_sale f 
       on s.id_mutation = f.id_mutation 
@@ -29,7 +29,7 @@ app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
     AND code_type_local = 1 
     AND valeur_fonciere BETWEEN ? AND ? 
     AND surface_reelle_bati BETWEEN ? AND ? 
-    AND surface_terrain BETWEEN ? AND ? `,
+    AND surface_terrain BETWEEN ? AND ?) WHERE favorite >= ? `,
     [
       req.body.commune.code,
       req.body.budgetRange[0],
@@ -38,6 +38,7 @@ app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
       req.body.batiRange[1],
       req.body.terrainRange[0],
       req.body.terrainRange[1],
+      req.body.favorite,
     ],
     (_, rows) => {
       res.json(rows);
