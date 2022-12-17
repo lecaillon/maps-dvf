@@ -13,6 +13,10 @@ function getMeanPrice(sale: Sale) {
 function getAddress(sale: Sale) {
   return `${sale.adresse_numero} ${sale.adresse_nom_voie} ${sale.code_postal} ${sale.nom_commune}`;
 }
+
+function fav(id_mutation: string) {
+  alert(id_mutation)
+}
 </script>
 
 <template>
@@ -21,16 +25,17 @@ function getAddress(sale: Sale) {
       <info-window>
         <v-card density="compact" theme="light" class="h-100 w-100">
           <v-card-text>
-            <div class="d-flex text-h6">Maison {{ `${sale.valeur_fonciere.toLocaleString()} €` }}<span style="margin-left: 9px; font-size: 13px">({{ getMeanPrice(sale) }} €/m²)</span></div>
+            <div class="d-flex text-h6">
+              <span> Maison {{ `${sale.valeur_fonciere.toLocaleString()} €` }}</span>
+              <span style="margin-left: 9px; font-size: 13px">({{ getMeanPrice(sale) }} €/m²)</span>
+            </div>
             <div style="font-size: small; margin-bottom: 13px">{{ getAddress(sale) }}</div>
             <v-icon style="margin-left: -3px;">mdi-home</v-icon><span class="ml-1 mr-2">{{ sale.nombre_pieces_principales }} pièces</span>
             <v-icon>mdi-ruler-square</v-icon><span class="ml-1 mr-2">{{ sale.surface_reelle_bati }} m²</span>
             <v-icon>mdi-pine-tree</v-icon><span class="mr-2">{{ sale.surface_terrain }} m²</span>
             <v-icon>mdi-calendar</v-icon><span class="ml-1 mr-2">{{ new Date(sale.date_mutation).getFullYear() }}</span>
+            <v-btn @click="fav(sale.id_mutation)" density="compact" variant="flat" icon="mdi-heart-outline" style="margin-left: -0px; margin-bottom: 2px;"></v-btn><span>Fav</span>
           </v-card-text>
-          <v-card-actions>
-            <v-btn>Street View</v-btn>
-          </v-card-actions>
         </v-card>
       </info-window>
     </Marker>
