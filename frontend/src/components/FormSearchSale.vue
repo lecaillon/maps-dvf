@@ -38,6 +38,25 @@ async function searchCommunes(val: any) {
           thumb-label="always"
           class="mt-8"
         ></v-range-slider>
+        <v-range-slider
+          v-model="store.searchQuery.batiRange"
+          label="Surface bati"
+          step="10"
+          min="0"
+          max="300"
+          thumb-label="always"
+          class="mt-8"
+        ></v-range-slider>
+        <v-range-slider
+          v-model="store.searchQuery.terrainRange"
+          label="Surface terrain"
+          step="100"
+          min="0"
+          max="10000"
+          thumb-label="always"
+          class="mt-8"
+        ></v-range-slider>
+        <v-range-slider v-model="store.searchQuery.annee" label="Année" step="1" min="2017" max="2022" thumb-label="always" class="mt-8"></v-range-slider>
       </v-container>
     </v-card-text>
     <v-card-actions>

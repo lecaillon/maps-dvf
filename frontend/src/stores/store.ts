@@ -6,7 +6,13 @@ import type { Commune } from "shared/models/commune";
 import type { Sale } from "shared/models/sale";
 
 export const useStore = defineStore("main-store", () => {
-  const searchQuery = ref({ commune: Deauville, budgetRange: [800000, 1500000] } as SearchSaleQuery);
+  const searchQuery = ref({
+    commune: Deauville,
+    budgetRange: [800000, 1500000],
+    annee: [2017, 2022],
+    batiRange: [90, 200],
+    terrainRange: [100, 2000],
+  } as SearchSaleQuery);
   const searchDisabled = computed(() => searchQuery.value.commune == null);
   const sales = ref([] as Sale[]);
 
@@ -31,7 +37,7 @@ export const useStore = defineStore("main-store", () => {
       method: "POST",
       body: JSON.stringify({ id_mutation, favorite }),
       headers: { "Content-type": "application/json" },
-      mode: "cors"
+      mode: "cors",
     });
   }
 

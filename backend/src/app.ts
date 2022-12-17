@@ -27,19 +27,28 @@ app.post<{}, Sale[], SearchSaleQuery, {}>("/sales", async (req, res) => {
       on s.id_mutation = f.id_mutation 
     WHERE code_commune = ? 
     AND code_type_local = 1 
-    AND valeur_fonciere BETWEEN ? AND ?`,
-    [req.body.commune.code, req.body.budgetRange[0], req.body.budgetRange[1]],
+    AND valeur_fonciere BETWEEN ? AND ? 
+    AND surface_reelle_bati BETWEEN ? AND ? 
+    AND surface_terrain BETWEEN ? AND ? `,
+    [
+      req.body.commune.code,
+      req.body.budgetRange[0],
+      req.body.budgetRange[1],
+      req.body.batiRange[0],
+      req.body.batiRange[1],
+      req.body.terrainRange[0],
+      req.body.terrainRange[1],
+    ],
     (_, rows) => {
       res.json(rows);
     }
   );
 });
 
-app.post<{}, {}, { id_mutation: string, favorite: number }, {}>("/favorite", async (req, res) => {
+app.post<{}, {}, { id_mutation: string; favorite: number }, {}>("/favorite", async (req, res) => {
   if (req.body.favorite == 0) {
     dbDvf.run("DELETE FROM favorite_sale WHERE id_mutation = ?", [req.body.id_mutation]);
-  }
-  else {
+  } else {
     dbDvf.run("INSERT INTO favorite_sale VALUES(?)", [req.body.id_mutation]);
   }
   return res.sendStatus(200);
