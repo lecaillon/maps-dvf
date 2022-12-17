@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2022",
+    "module": "CommonJS",
+    "lib": [
+      "esnext"
+    ],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ],
+      "~~/*": [
+        "./*"
+      ],
+      "shared/*": [
+        "../shared/*"
+      ]
+    }
+  }
+}
