@@ -12,7 +12,7 @@ export const useStore = defineStore("main-store", () => {
     annee: [2017, 2022],
     batiRange: [90, 200],
     terrainRange: [100, 2000],
-    favorite: 0
+    favorite: 0,
   } as SearchSaleQuery);
   const searchDisabled = computed(() => searchQuery.value.commune == null);
   const sales = ref([] as Sale[]);

@@ -60,7 +60,16 @@ async function searchCommunes(val: any) {
           class="mt-8"
           color="secondary"
         ></v-range-slider>
-        <v-range-slider v-model="store.searchQuery.annee" label="Année" step="1" min="2017" max="2022" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
+        <v-range-slider
+          v-model="store.searchQuery.annee"
+          label="Année"
+          step="1"
+          min="2017"
+          max="2022"
+          thumb-label="always"
+          class="mt-8"
+          color="secondary"
+        ></v-range-slider>
       </v-container>
     </v-card-text>
     <v-card-actions>

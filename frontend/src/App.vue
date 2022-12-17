@@ -21,9 +21,7 @@ function searchFav() {
         <v-toolbar-title>Maps - DVF</v-toolbar-title>
         <v-spacer />
         <v-btn @click="searchFav()" icon="mdi-heart" :color="store.searchQuery.favorite == 1 ? 'secondary' : ''"></v-btn>
-        <v-chip class="ma-2" color="secondary">
-          {{ store.sales.length }} résultat(s)
-        </v-chip>
+        <v-chip class="ma-2" color="secondary"> {{ store.sales.length }} résultat(s) </v-chip>
       </v-app-bar>
       <v-navigation-drawer v-model="showFormSearchSale" app width="375">
         <form-search-sale />
