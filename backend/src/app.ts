@@ -140,7 +140,7 @@ async function insertCsv(csv: string) {
       fs.createReadStream(csv)
         .pipe(parse({ delimiter: ",", from_line: 2 }))
         .on("data", function (row) {
-          if (row[3] == "Vente" && (row[30] == "Maison" || row[30] == "Appartement")) {
+          if (row[3] == "Vente" && (row[30] == "Maison" || row[30] == "Appartement") && (row[34] == "sols" || row[34] == null) && row[38] != "" && row[39] != "") {
             dbDvf.run(`INSERT INTO sale VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [
               row[0],
               row[1],
