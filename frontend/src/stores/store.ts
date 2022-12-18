@@ -8,7 +8,7 @@ import type { Sale } from "shared/models/sale";
 export const useStore = defineStore("main-store", () => {
   const searchQuery = ref({
     commune: Deauville,
-    budgetRange: [800000, 1500000],
+    budgetRange: [800000, 1300000],
     anneeRange: [2017, 2022],
     batiRange: [90, 220],
     terrainRange: [0, 2000],
