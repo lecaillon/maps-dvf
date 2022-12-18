@@ -10,8 +10,8 @@ export const useStore = defineStore("main-store", () => {
     commune: Deauville,
     budgetRange: [800000, 1500000],
     anneeRange: [2017, 2022],
-    batiRange: [90, 200],
-    terrainRange: [100, 2000],
+    batiRange: [90, 220],
+    terrainRange: [0, 2000],
     favorite: 0,
   } as SearchSaleQuery);
   const searchDisabled = computed(() => searchQuery.value.commune == null);
