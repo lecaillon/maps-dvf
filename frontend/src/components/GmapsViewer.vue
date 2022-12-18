@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { GoogleMap, Marker, InfoWindow } from "vue3-google-map";
+import { GMapsStyles } from "@/config/appsettings";
 import { useStore } from "@/stores/store";
 import type { Sale } from "shared/models/sale";
 
@@ -21,7 +22,7 @@ function fav(sale: Sale) {
 </script>
 
 <template>
-  <google-map :api-key="key" language="fr" :center="{ lat: store.searchQuery.commune.lat, lng: store.searchQuery.commune.lng }" :zoom="15">
+  <google-map :api-key="key" language="fr" :styles="GMapsStyles" :center="{ lat: store.searchQuery.commune.lat, lng: store.searchQuery.commune.lng }" :zoom="15">
     <Marker v-for="(sale, i) in store.sales" :options="{ position: { lat: sale.latitude, lng: sale.longitude } }" :key="i">
       <info-window>
         <v-card density="compact" theme="light" class="h-100 w-100">
