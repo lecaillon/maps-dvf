@@ -20,7 +20,7 @@ async function searchCommunes(val: any) {
         <v-range-slider label="Budget" v-model="store.searchQuery.budgetRange" step="100000" min="0" max="2000000" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
         <v-range-slider label="Surface bati" v-model="store.searchQuery.batiRange" step="10" min="0" max="300" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
         <v-range-slider label="Surface terrain" v-model="store.searchQuery.terrainRange" step="100" min="0" max="10000" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
-        <v-range-slider label="Année" v-model="store.searchQuery.anneeRange" step="1" min="2017" max="2022" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
+        <v-range-slider label="Année" v-model="store.searchQuery.anneeRange" step="1" min="2017" max="2023" thumb-label="always" class="mt-8" color="secondary"></v-range-slider>
       </v-container>
     </v-card-text>
     <v-card-actions>
